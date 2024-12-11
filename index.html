@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMI Frontend - JavaScript OOP</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./resources/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./resources/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./resources/favicon/site.webmanifest">
+
+    <link rel="stylesheet" href="./node_modules/reveal.js/dist/reset.css">
+    <link rel="stylesheet" href="./node_modules/reveal.js/dist/reveal.css">
+
+    <link rel="stylesheet" href="./node_modules/reveal.js/dist/theme/white-contrast.css">
+    <link rel="stylesheet" href="./node_modules/reveal.js/plugin/highlight/zenburn.css">
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Заглавие -->
+            <section>
+                <h2>Frontend Web Development</h2>
+                <h3>JavaScript - OOP</h3>
+            </section>
+
+            <!-- Съдържание -->
+            <section>
+                <h3>Съдържание</h3>
+                <ul>
+                    <li>Въведение в OOP</li>
+                    <li>Обекти и прототипи</li>
+                    <li>Класове в JavaScript</li>
+                    <li>Полиморфизъм и капсулация</li>
+                    <li>Заключение</li>
+                </ul>
+            </section>
+
+            <!-- Тема 1: Въведение в OOP ✅ -->
+            <section>
+                <section>
+                    <h4>Какво е OOP?</h4>
+                    <p>
+                        Обектно-ориентираното програмиране (OOP) е парадигма за разработка на софтуер, която структурира
+                        кода около <b>обекти</b>. Тези обекти представляват концепции или неща от реалния свят.
+                    </p>
+                    <p><i>Пример:</i> Обект <b>автомобил</b> може да има свойства като <b>цвят</b> и <b>модел</b>, и
+                        методи като <b>запалване</b>.</p>
+                </section>
+
+                <section>
+                    <h4>Защо OOP?</h4>
+                    <p>
+                        OOP предлага редица предимства:
+                    </p>
+                    <ul>
+                        <li>По-добра организация на кода чрез използване на класове и обекти.</li>
+                        <li>Повторно използване на код чрез наследяване.</li>
+                        <li>Гъвкавост и лесно разширяване на функционалности.</li>
+                        <li>По-лесна поддръжка и автоматизирано тестване.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Основни принципи на OOP</h4>
+                    <p>Основните концепции на OOP са:</p>
+                    <ul>
+                        <li><strong>Наследяване:</strong> Прехвърляне на свойства и методи от един клас към друг.
+                            <br><i>Пример:</i> Клас <code>Animal</code> има метод <code>eat()</code>, който е наследен
+                            от клас <code>Dog</code>.
+                        </li>
+                        <li><strong>Капсулация:</strong> Скриване на данни и методи в класове, осигурявайки достъп
+                            само чрез публични интерфейси. <br><i>Пример:</i> <code>getBalance()</code> метод връща
+                            стойността на скрито поле <code>balance</code>.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <ul>
+                        <li><strong>Полиморфизъм:</strong> Различно поведение на обекти с един и същ интерфейс.
+                            <br><i>Пример:</i> Метод <code>makeSound()</code> в клас <code>Animal</code> се държи
+                            различно за обекти <code>Dog</code> и <code>Cat</code>.
+                        </li>
+                        <li><strong>Абстракция:</strong> Скриване на сложността и показване на съществените детайли.
+                            <br><i>Пример:</i> Клас <code>Car</code> предоставя метод <code>start()</code>, който скрива
+                            сложността на запалването на двигателя.
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Пример: OOP в действие</h4>
+                    <p>Създаване на обект <b>куче</b> и използване на неговите свойства и методи:</p>
+                    <pre><code class="language-javascript">// Дефиниране на обект
+const dog = {
+    name: "Rex",
+    breed: "Labrador",
+    age: 3,
+    bark() {
+        console.log(`${this.name} казва: "Woof!"`);
+    }
+};
+
+// Извикване на методи
+dog.bark(); // Output: Rex казва: "Woof!"</code></pre>
+                </section>
+
+                <section>
+                    <p>Същият пример, но с използване на клас:</p>
+                    <pre><code class="language-javascript">// Дефиниране на клас
+class Dog {
+    constructor(name, breed, age) {
+        this.name = name;
+        this.breed = breed;
+        this.age = age;
+    }
+
+    bark() {
+        console.log(`${this.name} казва: "Woof!"`);
+    }
+}
+
+// Създаване на обект
+const dog = new Dog("Rex", "Labrador", 3);
+dog.bark(); // Output: Rex казва: "Woof!"</code></pre>
+                </section>
+            </section>
+            <!-- * Тема 1 End -->
+
+            <!-- Тема 2: Обекти и прототипи ✅ -->
+            <section>
+                <section>
+                    <h4>Обекти в JavaScript</h4>
+                    <p>Обектите са ключов елемент в JavaScript. Те представляват структури, съставени от ключове
+                        (свойства) и стойности.</p>
+                    <p>Могат да съдържат данни (примитиви или други обекти) и методи (функции, свързани с обекта).</p>
+                    <p><strong>Достъп до свойства:</strong></p>
+                    <ul>
+                        <li>Чрез точкова нотация: <code>object.property</code></li>
+                        <li>Чрез скоби: <code>object['property']</code></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Начини за създаване на обекти</h4>
+                    <p>Чрез литерал:</p>
+                    <p>Това е най-простият и директен начин за създаване на обект.</p>
+                    <pre><code class="language-javascript">const person = {
+    name: "Alice",
+    age: 25,
+    greet() {
+        console.log(`Hello, my name is ${this.name}!`);
+    }
+};
+
+console.log(person.name); // Output: Alice
+person.greet(); // Output: Hello, my name is Alice!</code></pre>
+                </section>
+
+                <section>
+                    <h4>Ключовата дума <code>this</code> в JavaScript</h4>
+                    <p>Ключовата дума <code>this</code> се отнася до обекта, който извиква дадена функция. Тя се
+                        определя динамично, в зависимост от контекста на изпълнение.</p>
+
+                </section>
+
+                <section>
+                    <h5>Основни контексти на <code>this</code>:</h5>
+                    <ul>
+                        <li><strong>Глобален контекст:</strong> <code>this</code> сочи към глобалния обект
+                            (<code>window</code> в браузъри или <code>global</code> в Node.js).</li>
+                        <li><strong>В обектен метод:</strong> <code>this</code> сочи към обекта, който извиква метода.
+                        </li>
+                        <li><strong>В конструктор:</strong> <code>this</code> сочи към новосъздадения обект.</li>
+                        <li><strong>В arrow функция:</strong> <code>this</code> наследява контекста от заобикалящия
+                            обхват.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h5>Примери:</h5>
+                    <pre><code class="language-javascript">// Глобален контекст
+console.log(this); // В браузър: window, в Node.js: глобалния обект
+
+// В обектен метод
+const person = {
+    name: "Alice",
+    greet() {
+        console.log(`Hello, my name is ${this.name}`);
+    }
+};
+person.greet(); // Output: Hello, my name is Alice
+
+// В конструктор
+function Person(name) {
+    this.name = name;
+}
+const person1 = new Person("Bob");
+console.log(person1.name); // Output: Bob
+
+// В arrow функция
+const obj = {
+    name: "Charlie",
+    greet: () => {
+        console.log(this.name);
+    }
+};
+obj.greet(); // Output: undefined (this сочи към глобалния контекст)</code></pre>
+                </section>
+
+                <section>
+                    <h4>Създаване на обекти с <code>Object.create</code></h4>
+                    <p>Методът <code>Object.create</code> се използва за създаване на нов обект, който наследява от друг
+                        обект (прототип).</p>
+                    <pre><code class="language-javascript">const basePerson = {
+    greet() {
+        console.log(`Hello!`);
+    }
+};
+const teacher = Object.create(basePerson);
+teacher.subject = "Math";
+teacher.greet(); // Output: Hello!</code></pre>
+                </section>
+
+                <section>
+                    <h4>Обяснение:</h4>
+                    <ul>
+                        <li><code>basePerson</code>: Това е обектът, който служи като прототип.</li>
+                        <li><code>teacher</code>: Създаден е нов обект, който наследява свойствата и методите на
+                            <code>basePerson</code>.
+                        </li>
+                        <li>Можем да добавяме собствени свойства към <code>teacher</code>, без да променяме
+                            <code>basePerson</code>.
+                        </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Прототипно наследяване</h4>
+                    <p>Прототипното наследяване позволява един обект да наследява свойства и методи от друг.</p>
+                    <ul>
+                        <li>Всеки обект има свой <b>прототип</b>, достъпен чрез <code>Object.getPrototypeOf</code> или
+                            <code>__proto__</code> свойството.
+                        </li>
+                        <li>Ако дадено свойство липсва в обекта, JavaScript го проверява в прототипа му.</li>
+                        <li>Цялата система е базирана на верига от прототипи.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="./resources/images/The+Prototype+Chain+for+JS+Classes.jpg" alt="Prototype chain diagram">
+                </section>
+
+                <section>
+                    <h4>Пример:</h4>
+                    <pre><code class="language-javascript">// Базов обект
+const animal = {
+    sound: "Generic sound",
+    makeSound() {
+        console.log(this.sound);
+    }
+};
+
+// Наследяване
+const dog = Object.create(animal);
+dog.sound = "Bark";
+dog.makeSound(); // Output: Bark
+
+// Проверка на прототипа
+console.log(Object.getPrototypeOf(dog) === animal); // true</code></pre>
+                </section>
+
+                <section>
+                    <h4>Пример за модерен JavaScript</h4>
+                    <pre><code class="language-javascript">class Animal {
+    constructor(sound) {
+        this.sound = sound;
+    }
+    makeSound() {
+        console.log(this.sound);
+    }
+}
+
+class Dog extends Animal {
+    constructor() {
+        super("Bark");
+    }
+}
+
+const dog = new Dog();
+dog.makeSound(); // Output: Bark</code></pre>
+                </section>
+
+                <section>
+                    <h4>Предимства и ограничения на прототипното наследяване</h4>
+                    <p>Предимства:</p>
+                    <ul>
+                        <li>Ефективно използване на паметта чрез споделени методи.</li>
+                        <li>Лесно разширяване на функционалността.</li>
+                        <li>Гъвкавост чрез динамични прототипи.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p>Ограничения:</p>
+                    <ul>
+                        <li>Сложност при разбиране на веригата от прототипи.</li>
+                        <li>Промяната на прототипа може да доведе до неочаквано поведение.</li>
+                        <li>Някои методи като <code>Object.keys</code> не взимат прототипните свойства.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <p><i>Пример за потенциален проблем:</i></p>
+                    <pre><code class="language-javascript">// Наследяване на метод, който модифицира обекта
+const base = {
+    items: [],
+    addItem(item) {
+        this.items.push(item);
+    }
+};
+
+const obj1 = Object.create(base);
+const obj2 = Object.create(base);
+
+obj1.addItem("apple");
+console.log(obj2.items); // Output: ["apple"] (споделят едно и също поле items)</code></pre>
+                </section>
+
+                <section>
+                    <h4>Как да избегнем проблема?</h4>
+                    <p>Използване на конструктор функции:</p>
+                    <p>Конструктор функциите са начин за създаване на обекти с уникални данни, като използвате ключовата
+                        дума new за инициализация.</p>
+                    <pre><code class="language-javascript">function Base() {
+    this.items = [];
+}
+
+Base.prototype.addItem = function(item) {
+    this.items.push(item);
+};
+
+const obj1 = new Base();
+const obj2 = new Base();
+
+obj1.addItem("apple");
+console.log(obj2.items); // Output: [] (всеки обект има свои собствени данни)</code></pre>
+                </section>
+
+                <section>
+                    <h4>Съвременни подходи</h4>
+                    <p>Със създаването на класовете в ES6, прототипното наследяване става по-лесно и четимо:</p>
+                    <pre><code class="language-javascript">class Base {
+    constructor() {
+        this.items = [];
+    }
+
+    addItem(item) {
+        this.items.push(item);
+    }
+
+    getItems() {
+        return this.items;
+    }
+}
+
+const obj1 = new Base();
+const obj2 = new Base();
+
+obj1.addItem("apple");
+console.log(obj2.getItems()); // Output: [] (всеки обект има собствени данни)</code></pre>
+                </section>
+            </section>
+            <!-- * Тема 2 End -->
+
+            <!-- Тема 3: Класове в JavaScript ✅ -->
+            <section>
+                <section>
+                    <h4>Класове в JavaScript</h4>
+                    <p>Класовете са шаблони за създаване на обекти. Те предлагат структуриран начин за дефиниране на
+                        обекти и техните свойства и методи.</p>
+                </section>
+
+                <section>
+                    <p><strong>Защо да използваме класове?</strong></p>
+                    <ul>
+                        <li>Осигуряват по-четим и подреден код в сравнение с прототипите.</li>
+                        <li>Подобряват разширяемостта чрез вградено наследяване.</li>
+                        <li>Улесняват работата с по-сложни структури, като големи проекти.</li>
+                    </ul>
+                    <p><i>Важно:</i> Класовете са синтактична захар. Под капака те използват прототипно наследяване.</p>
+                </section>
+
+                <!-- Слайд 2: Създаване на клас -->
+                <section>
+                    <h4>Създаване на клас</h4>
+                    <p>Класовете се дефинират с ключовата дума <code>class</code>. Конструкторът и методите се дефинират
+                        вътре в тялото на класа.</p>
+                </section>
+
+                <section>
+                    <pre><code class="language-javascript">// Дефиниране на клас с конструктор и метод
+class Animal {
+    constructor(name) {
+        // Конструктор: задава начални стойности
+        this.name = name;
+    }
+
+    // Метод: поведение на обекта
+    makeSound() {
+        console.log(`${this.name} издава звук!`);
+    }
+}
+
+// Създаване на обект от класа
+const cat = new Animal("Котка");
+cat.makeSound(); // Output: Котка издава звук!</code></pre>
+                    <p><i>Забележка:</i> Конструкторът се извиква автоматично при създаването на нов обект.</p>
+                </section>
+
+                <!-- Слайд 3: Наследяване -->
+                <section>
+                    <h4>Наследяване в JavaScript</h4>
+                    <p>Класовете позволяват създаването на нови класове, които наследяват свойства и методи от
+                        съществуващите.</p>
+                    <p>Ключови думи:</p>
+                    <ul>
+                        <li><code>extends</code>: Създава наследствена връзка между класове.</li>
+                        <li><code>super</code>: Извиква конструктора или методите на базовия клас.</li>
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h4>Пример</h4>
+                    <pre><code class="language-javascript">// Основен клас
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+
+    makeSound() {
+        console.log(`${this.name} издава звук!`);
+    }
+}
+
+// Наследен клас
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name); // Извиква конструктора на Animal
+        this.breed = breed;
+    }
+
+    makeSound() {
+        console.log(`${this.name} (${this.breed}) казва "Бау!"`);
+    }
+}
+
+const myDog = new Dog("Рекс", "Лабрадор");
+myDog.makeSound(); // Output: Рекс (Лабрадор) казва "Бау!"</code></pre>
+                </section>
+
+                <section>
+                    <h4>Статични методи</h4>
+                    <p>Статичните методи се дефинират с ключовата дума <code>static</code>. Те принадлежат на класа, а
+                        не на неговите инстанции.</p>
+                </section>
+
+                <section>
+                    <h4>Пример:</h4>
+                    <pre><code class="language-javascript">class MathUtils {
+    // Статичен метод
+    static add(a, b) {
+        return a + b;
+    }
+
+    static description() {
+        return "Utility class for mathematical operations.";
+    }
+}
+
+// Извикване на статични методи
+console.log(MathUtils.add(5, 3)); // Output: 8
+console.log(MathUtils.description()); // Output: Utility class for mathematical operations
+
+// Грешка: статични методи не могат да се извикат от инстанции
+const utils = new MathUtils();
+console.log(utils.add(5, 3)); // TypeError</code></pre>
+                    <p><i>Важно:</i> Статичните методи обикновено се използват за помощни функции.</p>
+                </section>
+
+                <section>
+                    <h4>Частни свойства и методи</h4>
+                    <p>Частните свойства и методи започват с <code>#</code>. Те не са достъпни извън класа.</p>
+                </section>
+
+                <section>
+                    <h4>Пример:</h4>
+                    <pre><code class="language-javascript">class BankAccount {
+    #balance; // Частно свойство
+
+    constructor(initialBalance) {
+        this.#balance = initialBalance;
+    }
+
+    // Частен метод
+    #logTransaction(amount) {
+        console.log(`Transaction: ${amount}`);
+    }
+
+    deposit(amount) {
+        if (amount > 0) {
+            this.#balance += amount;
+            this.#logTransaction(amount);
+        }
+    }
+
+    getBalance() {
+        return this.#balance;
+    }
+}
+
+const account = new BankAccount(100);
+account.deposit(50);
+console.log(account.getBalance()); // Output: 150
+console.log(account.#balance); // SyntaxError: Private field '#balance' must be declared in an enclosing class</code></pre>
+                </section>
+
+            </section>
+            <!-- * Тема 3 End -->
+
+            <!-- Тема 4: Полиморфизъм и инкапсулация ✅ -->
+            <section>
+                <section>
+                    <h4>Полиморфизъм</h4>
+                    <p>Полиморфизмът е концепция в ООП, която позволява на различни класове да споделят едно и също
+                        поведение, като използват еднакви методи, дори ако тези класове са различни по тип.</p>
+                    <p>Това се постига чрез наследяване, което позволява на подкласи да променят или разширяват
+                        поведението
+                        на базовия клас.</p>
+                </section>
+
+                <section>
+                    <h4>Пример:</h4>
+                    <pre><code class="language-javascript">class Animal {
+    makeSound() {
+        console.log("Животно издава звук");
+    }
+}
+
+class Dog extends Animal {
+    makeSound() {
+        console.log("Куче казва Бау!");
+    }
+}
+
+class Cat extends Animal {
+    makeSound() {
+        console.log("Котка казва Мяу!");
+    }
+}
+
+// Използване на полиморфизъм
+const animals = [new Dog(), new Cat()];
+animals.forEach(animal => animal.makeSound());
+// Output:
+// Куче казва Бау!
+// Котка казва Мяу!</code></pre>
+                </section>
+
+                <section>
+                    <h4>Капсулация</h4>
+                    <p>Капсулацията е концепция, която позволява скриването на данни и методи в класове, за да се
+                        предпазят от нежелани промени.</p>
+                    <p>Това се постига чрез дефиниране на частни свойства и методи, които не могат да бъдат достъпени
+                        извън класа.</p>
+                </section>
+
+                <section>
+                    <h4>Пример:</h4>
+                    <pre><code class="language-javascript">class BankAccount {
+    #balance;
+
+    constructor(initialBalance) {
+        this.#balance = initialBalance;
+    }
+
+    deposit(amount) {
+        if (amount > 0) {
+            this.#balance += amount;
+        }
+
+        this.#logTransaction(amount);
+    }
+
+    #logTransaction(amount) {
+        console.log(`Transaction: ${amount}`);
+    }
+
+    getBalance() {
+        return this.#balance;
+    }
+
+    setBalance(newBalance) {
+        this.#balance = newBalance;
+    }
+}
+
+const account = new BankAccount(100);
+account.deposit(50);
+console.log(account.getBalance()); // Output: 150
+account.#balance = 1000; // SyntaxError: Private field '#balance' must be declared in an enclosing class</code></pre>
+                </section>
+
+                <section>
+                    <h4>Пример: Управление на различни устройства</h4>
+                    <pre><code class="language-javascript">class Device {
+    #status;
+
+    constructor(status) {
+        this.#status = status;
+    }
+
+    getStatus() {
+        return this.#status;
+    }
+
+    turnOn() {
+        console.log("Устройството е включено");
+    }
+
+    turnOff() {
+        console.log("Устройството е изключено");
+    }
+}
+
+class Computer extends Device {
+    turnOn() {
+        console.log("Компютърът се стартира");
+    }
+}
+
+class Smartphone extends Device {
+    turnOn() {
+        console.log("Смартфонът се включва");
+    }
+}
+
+const devices = [new Computer("off"), new Smartphone("off")];
+devices.forEach(device => device.turnOn());
+// Output:
+// Компютърът се стартира
+// Смартфонът се включва</code></pre>
+                </section>
+            </section>
+            <!-- * Тема 4 End -->
+
+            <!-- Заключение -->
+            <section>
+                <section>
+                    <h4>Заключение</h4>
+                    <p>Обектно-ориентираното програмиране е мощен инструмент за създаване на по-структуриран и
+                        удобен за поддръжка код. С неговите принципи като наследяване, капсулация и полиморфизъм,
+                        можем да
+                        създадем мощни и гъвкави приложения.</p>
+                    <p>JavaScript предлага множество възможности за работа с обекти и класове, които ни позволяват да
+                        създадаваме сложни и иновативни решения.</p>
+                </section>
+
+                <section>
+                    <h4>Полезни ресурси</h4>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects">MDN: Обекти и
+                                прототипи</a></li>
+                        <li><a href="https://javascript.info/">JavaScript.info</a></li>
+                        <li><a href="https://eloquentjavascript.net/">Eloquent JavaScript</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Благодаря за вниманието!</h4>
+                    <p>Имате ли въпроси?</p>
+                    <p>Можете да се свържете с мен за допълнителна информация:</p>
+                    <ul>
+                        <li><strong>Email:</strong> konstantin.gogov@icloud.com</li>
+                        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/konstantin-gogov/"
+                                target="_blank">Konstantin
+                                Gogov</a>
+                        </li>
+                    </ul>
+                    <p><strong>Вдъхновението идва от вас – продължавайте да учите и експериментирате!</strong></p>
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <script type="module">
+        import Reveal from './node_modules/reveal.js/dist/reveal.esm.js';
+        import Highlight from './node_modules/reveal.js/plugin/highlight/highlight.esm.js';
+        import CopyCode from './node_modules/reveal.js-copycode/plugin/copycode/copycode.esm.js';
+
+        Reveal.initialize({
+            hash: true,
+            history: true,
+            plugins: [Highlight, CopyCode],
+            progress: true,
+        });
+    </script>
+</body>
+
+</html>
